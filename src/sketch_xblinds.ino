@@ -21,7 +21,11 @@ extern "C"
 #define motorPin2  D2                       // IN2 on the ULN2003 driver
 #define motorPin3  D3                       // IN3 on the ULN2003 driver
 #define motorPin4  D4                       // IN4 on the ULN2003 driver
-#define STEPS 2048
+
+#define MOTOR_DIR D4
+#define MOTOR_STEP D3
+
+#define STEPS 512
 #define MotorInterfaceType 8
 
 
@@ -97,7 +101,8 @@ void adjuststepper(char* tmpdir);
 WiFiClient espClient;
 PubSubClient MQTTclient(espClient);
 ESP8266WebServer webserver(80);
-AccelStepper stepper = AccelStepper(AccelStepper::FULL4WIRE, motorPin1, motorPin3, motorPin2, motorPin4);
+//AccelStepper stepper = AccelStepper(AccelStepper::FULL4WIRE, motorPin1, motorPin3, motorPin2, motorPin4);
+AccelStepper stepper = AccelStepper(AccelStepper::DRIVER, MOTOR_STEP, MOTOR_DIR);
 Pinger pinger;
 ESP8266HTTPUpdateServer httpUpdater;
 
